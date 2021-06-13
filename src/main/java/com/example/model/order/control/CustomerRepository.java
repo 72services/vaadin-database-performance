@@ -18,14 +18,4 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             GROUP BY c.id
             """)
     List<CustomerInfo> findAllCustomersWithRevenue(Pageable pageable);
-
-    @Query(value = """
-            SELECT c.id, c.lastname, c.firstname, SUM(p.price)
-            FROM customer c 
-            JOIN purchase_order o on o.customer_id = c.id 
-            JOIN order_item i on i.order_id = o.id
-            JOIN product p on p.id = i.product_id
-            GROUP BY c.id
-            """, nativeQuery = true)
-    List<CustomerInfo> findAllCustomersWithRevenueSql(Pageable pageable);
 }

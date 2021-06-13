@@ -1,8 +1,8 @@
-package com.example.views.person;
+package com.example.views.employee;
 
-import com.example.model.person.control.PersonService;
-import com.example.model.person.entity.Person;
-import com.example.views.main.MainView;
+import com.example.model.employee.control.EmployeeService;
+import com.example.model.employee.entity.Employee;
+import com.example.views.main.ApplicationLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.UI;
@@ -31,15 +31,15 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.Optional;
 
-@RouteAlias(value = "", layout = MainView.class)
-@Route(value = "master-detail/:samplePersonID?/:action?(edit)", layout = MainView.class)
-@PageTitle("Person Master-Detail")
-public class PersonMasterDetailView extends Div implements BeforeEnterObserver {
+@RouteAlias(value = "", layout = ApplicationLayout.class)
+@Route(value = "master-detail/:sampleEmployeeID?/:action?(edit)", layout = ApplicationLayout.class)
+@PageTitle("Employee Master-Detail")
+public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver {
 
-    private final String SAMPLEPERSON_ID = "samplePersonID";
-    private final String SAMPLEPERSON_EDIT_ROUTE_TEMPLATE = "master-detail/%d/edit";
+    private final String SAMPLE_EMPLOYEE_ID = "sampleEmployeeID";
+    private final String SAMPLE_EMPLOYEE_EDIT_ROUTE_TEMPLATE = "master-detail/%d/edit";
 
-    private Grid<Person> grid = new Grid<>(Person.class, false);
+    private final Grid<Employee> grid = new Grid<>(Employee.class, false);
 
     private TextField firstName;
     private TextField lastName;
@@ -52,19 +52,19 @@ public class PersonMasterDetailView extends Div implements BeforeEnterObserver {
     private Button cancel = new Button("Cancel");
     private Button save = new Button("Save");
 
-    private BeanValidationBinder<Person> binder;
+    private BeanValidationBinder<Employee> binder;
 
-    private Person person;
+    private Employee employee;
 
-    private PersonService PersonService;
+    private EmployeeService EmployeeService;
 
-    public PersonMasterDetailView(PersonService personService) {
-        this.PersonService = personService;
+    public EmployeeMasterDetailView(EmployeeService employeeService) {
+        this.EmployeeService = employeeService;
 
         addClassName("master-detail-view");
 
         // Create UI
-        SplitLayout splitLayout = new SplitLayout();
+        var splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
 
         createGridLayout(splitLayout);
@@ -79,12 +79,12 @@ public class PersonMasterDetailView extends Div implements BeforeEnterObserver {
         grid.addColumn("phone").setAutoWidth(true);
         grid.addColumn("dateOfBirth").setAutoWidth(true);
         grid.addColumn("occupation").setAutoWidth(true);
-        TemplateRenderer<Person> importantRenderer = TemplateRenderer.<Person>of(
+        var importantRenderer = TemplateRenderer.<Employee>of(
                 "<iron-icon hidden='[[!item.important]]' icon='vaadin:check' style='width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: var(--lumo-primary-text-color);'></iron-icon><iron-icon hidden='[[item.important]]' icon='vaadin:minus' style='width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: var(--lumo-disabled-text-color);'></iron-icon>")
-                .withProperty("important", Person::isImportant);
+                .withProperty("important", Employee::isImportant);
         grid.addColumn(importantRenderer).setHeader("Important").setAutoWidth(true);
 
-        grid.setItems(query -> personService.list(
+        grid.setItems(query -> employeeService.list(
                 PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
                 .stream());
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
@@ -93,15 +93,15 @@ public class PersonMasterDetailView extends Div implements BeforeEnterObserver {
         // when a row is selected or deselected, populate form
         grid.asSingleSelect().addValueChangeListener(event -> {
             if (event.getValue() != null) {
-                UI.getCurrent().navigate(String.format(SAMPLEPERSON_EDIT_ROUTE_TEMPLATE, event.getValue().getId()));
+                UI.getCurrent().navigate(String.format(SAMPLE_EMPLOYEE_EDIT_ROUTE_TEMPLATE, event.getValue().getId()));
             } else {
                 clearForm();
-                UI.getCurrent().navigate(PersonMasterDetailView.class);
+                UI.getCurrent().navigate(EmployeeMasterDetailView.class);
             }
         });
 
         // Configure Form
-        binder = new BeanValidationBinder<>(Person.class);
+        binder = new BeanValidationBinder<>(Employee.class);
 
         // Bind fields. This where you'd define e.g. validation rules
 
@@ -114,18 +114,18 @@ public class PersonMasterDetailView extends Div implements BeforeEnterObserver {
 
         save.addClickListener(e -> {
             try {
-                if (this.person == null) {
-                    this.person = new Person();
+                if (this.employee == null) {
+                    this.employee = new Employee();
                 }
-                binder.writeBean(this.person);
+                binder.writeBean(this.employee);
 
-                personService.update(this.person);
+                employeeService.update(this.employee);
                 clearForm();
                 refreshGrid();
-                Notification.show("SamplePerson details stored.");
-                UI.getCurrent().navigate(PersonMasterDetailView.class);
+                Notification.show("SampleEmployee details stored.");
+                UI.getCurrent().navigate(EmployeeMasterDetailView.class);
             } catch (ValidationException validationException) {
-                Notification.show("An exception happened while trying to store the samplePerson details.");
+                Notification.show("An exception happened while trying to store the sampleEmployee details.");
             }
         });
 
@@ -133,32 +133,32 @@ public class PersonMasterDetailView extends Div implements BeforeEnterObserver {
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        Optional<Integer> samplePersonId = event.getRouteParameters().getInteger(SAMPLEPERSON_ID);
-        if (samplePersonId.isPresent()) {
-            Optional<Person> samplePersonFromBackend = PersonService.get(samplePersonId.get());
-            if (samplePersonFromBackend.isPresent()) {
-                populateForm(samplePersonFromBackend.get());
+        var sampleEmployeeId = event.getRouteParameters().getInteger(SAMPLE_EMPLOYEE_ID);
+        if (sampleEmployeeId.isPresent()) {
+            var sampleEmployeeFromBackend = EmployeeService.get(sampleEmployeeId.get());
+            if (sampleEmployeeFromBackend.isPresent()) {
+                populateForm(sampleEmployeeFromBackend.get());
             } else {
                 Notification.show(
-                        String.format("The requested samplePerson was not found, ID = %d", samplePersonId.get()), 3000,
+                        String.format("The requested sampleEmployee was not found, ID = %d", sampleEmployeeId.get()), 3000,
                         Notification.Position.BOTTOM_START);
                 // when a row is selected but the data is no longer available,
                 // refresh grid
                 refreshGrid();
-                event.forwardTo(PersonMasterDetailView.class);
+                event.forwardTo(EmployeeMasterDetailView.class);
             }
         }
     }
 
     private void createEditorLayout(SplitLayout splitLayout) {
-        Div editorLayoutDiv = new Div();
+        var editorLayoutDiv = new Div();
         editorLayoutDiv.setId("editor-layout");
 
-        Div editorDiv = new Div();
+        var editorDiv = new Div();
         editorDiv.setId("editor");
         editorLayoutDiv.add(editorDiv);
 
-        FormLayout formLayout = new FormLayout();
+        var formLayout = new FormLayout();
         firstName = new TextField("First Name");
         lastName = new TextField("Last Name");
         email = new TextField("Email");
@@ -180,7 +180,7 @@ public class PersonMasterDetailView extends Div implements BeforeEnterObserver {
     }
 
     private void createButtonLayout(Div editorLayoutDiv) {
-        HorizontalLayout buttonLayout = new HorizontalLayout();
+        var buttonLayout = new HorizontalLayout();
         buttonLayout.setId("button-layout");
         buttonLayout.setWidthFull();
         buttonLayout.setSpacing(true);
@@ -191,7 +191,7 @@ public class PersonMasterDetailView extends Div implements BeforeEnterObserver {
     }
 
     private void createGridLayout(SplitLayout splitLayout) {
-        Div wrapper = new Div();
+        var wrapper = new Div();
         wrapper.setId("grid-wrapper");
         wrapper.setWidthFull();
         splitLayout.addToPrimary(wrapper);
@@ -207,10 +207,9 @@ public class PersonMasterDetailView extends Div implements BeforeEnterObserver {
         populateForm(null);
     }
 
-    private void populateForm(Person value) {
-        this.person = value;
-        binder.readBean(this.person);
-
+    private void populateForm(Employee value) {
+        this.employee = value;
+        binder.readBean(this.employee);
     }
 }
 

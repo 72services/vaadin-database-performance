@@ -46,29 +46,29 @@ public class OrderDataGenerator implements CommandLineRunner {
 
         LOGGER.info("... Generating 400 Sample Customer Entities with Orders ...");
 
-        Product product = new Product();
+        var product = new Product();
         product.setName("Pencil");
         product.setPrice(2.5d);
 
-        final Product finalProduct = productRepository.saveAndFlush(product);
+        final var finalProduct = productRepository.saveAndFlush(product);
 
-        ExampleDataGenerator<Customer> customerDataGenerator = new ExampleDataGenerator<>(Customer.class, LocalDateTime.now());
+        var customerDataGenerator = new ExampleDataGenerator<>(Customer.class, LocalDateTime.now());
         customerDataGenerator.setData(Customer::setFirstname, DataType.FIRST_NAME);
         customerDataGenerator.setData(Customer::setLastname, DataType.LAST_NAME);
 
-        List<Customer> customers = customerDataGenerator.create(400, 123);
+        var customers = customerDataGenerator.create(100, 123);
         customers.forEach(customer -> {
-            Random random = new Random();
+            var random = new Random();
             for (int j = 0; j < random.nextInt(10) + 1; j++) {
-                ExampleDataGenerator<Order> orderDataGenerator = new ExampleDataGenerator<>(Order.class, LocalDateTime.now());
+                var orderDataGenerator = new ExampleDataGenerator<>(Order.class, LocalDateTime.now());
                 orderDataGenerator.setData(Order::setOrderDate, DataType.DATE_LAST_1_YEAR);
-                List<Order> orders = orderDataGenerator.create(1, 124);
+                var orders = orderDataGenerator.create(1, 124);
                 customer.getOrders().add(orders.get(0));
 
                 for (int k = 0; k < random.nextInt(20) + 1; k++) {
-                    ExampleDataGenerator<OrderItem> orderItemDataGenerator = new ExampleDataGenerator<>(OrderItem.class, LocalDateTime.now());
+                    var orderItemDataGenerator = new ExampleDataGenerator<>(OrderItem.class, LocalDateTime.now());
                     orderItemDataGenerator.setData(OrderItem::setQuantity, DataType.NUMBER_UP_TO_10);
-                    List<OrderItem> orderItems = orderItemDataGenerator.create(1, 123);
+                    var orderItems = orderItemDataGenerator.create(1, 123);
                     orderItems.get(0).setProduct(finalProduct);
 
                     orders.get(0).getItems().add(orderItems.get(0));

@@ -1,9 +1,9 @@
 package com.example.views.main;
 
+import com.example.views.employee.EmployeeTreeView;
 import com.example.views.order.CustomerRevenueV1GridView;
 import com.example.views.order.CustomerRevenueV2GridView;
-import com.example.views.order.CustomerRevenueV3GridView;
-import com.example.views.person.PersonMasterDetailView;
+import com.example.views.employee.EmployeeMasterDetailView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -25,12 +25,12 @@ import java.util.Optional;
 /**
  * The main view is a top-level placeholder for other views.
  */
-public class MainView extends AppLayout {
+public class ApplicationLayout extends AppLayout {
 
     private final Tabs menu;
     private H1 viewTitle;
 
-    public MainView() {
+    public ApplicationLayout() {
         setPrimarySection(Section.DRAWER);
         addToNavbar(true, createHeaderContent());
         menu = createMenu();
@@ -38,7 +38,7 @@ public class MainView extends AppLayout {
     }
 
     private Component createHeaderContent() {
-        HorizontalLayout layout = new HorizontalLayout();
+        var layout = new HorizontalLayout();
         layout.setId("header");
         layout.getThemeList().set("dark", true);
         layout.setWidthFull();
@@ -52,23 +52,25 @@ public class MainView extends AppLayout {
     }
 
     private Component createDrawerContent(Tabs menu) {
-        VerticalLayout layout = new VerticalLayout();
+        var layout = new VerticalLayout();
         layout.setSizeFull();
         layout.setPadding(false);
         layout.setSpacing(false);
         layout.getThemeList().set("spacing-s", true);
         layout.setAlignItems(FlexComponent.Alignment.STRETCH);
-        HorizontalLayout logoLayout = new HorizontalLayout();
+
+        var logoLayout = new HorizontalLayout();
         logoLayout.setId("logo");
         logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
         logoLayout.add(new Image("images/logo.png", "My App logo"));
         logoLayout.add(new H1("My App"));
+
         layout.add(logoLayout, menu);
         return layout;
     }
 
     private Tabs createMenu() {
-        final Tabs tabs = new Tabs();
+        var tabs = new Tabs();
         tabs.setOrientation(Tabs.Orientation.VERTICAL);
         tabs.addThemeVariants(TabsVariant.LUMO_MINIMAL);
         tabs.setId("tabs");
@@ -78,15 +80,15 @@ public class MainView extends AppLayout {
 
     private Component[] createMenuItems() {
         return new Tab[]{
-                createTab("Persons", PersonMasterDetailView.class),
+                createTab("Employees", EmployeeMasterDetailView.class),
+                createTab("Employee Tree", EmployeeTreeView.class),
                 createTab("Customers Revenue (Version 1)", CustomerRevenueV1GridView.class),
-                createTab("Customers Revenue (Version 2)", CustomerRevenueV2GridView.class),
-                createTab("Customers Revenue (Version 3)", CustomerRevenueV3GridView.class)
+                createTab("Customers Revenue (Version 2)", CustomerRevenueV2GridView.class)
         };
     }
 
     private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
-        final Tab tab = new Tab();
+        var tab = new Tab();
         tab.add(new RouterLink(text, navigationTarget));
         ComponentUtil.setData(tab, Class.class, navigationTarget);
         return tab;
@@ -105,7 +107,7 @@ public class MainView extends AppLayout {
     }
 
     private String getCurrentPageTitle() {
-        PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
+        var title = getContent().getClass().getAnnotation(PageTitle.class);
         return title == null ? "" : title.value();
     }
 }

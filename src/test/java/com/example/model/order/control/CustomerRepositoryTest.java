@@ -22,11 +22,4 @@ class CustomerRepositoryTest {
 
         assertEquals(0, customers.size());
     }
-
-    @Test
-    void findAllCustomersWithRevenueSql() {
-        List<CustomerInfo> customers = customerRepository.findAllCustomersWithRevenueSql(PageRequest.of(1, 50));
-
-        assertEquals(0, customers.size());
-    }
 }

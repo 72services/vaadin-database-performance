@@ -1,19 +1,23 @@
-package com.example.model.person.entity;
+package com.example.model.employee.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-public class Person {
+public class Employee {
 
     @Id
-    @SequenceGenerator(name = "person_seq", sequenceName = "person_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_seq")
+    @SequenceGenerator(name = "employee_seq", sequenceName = "employee_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
     private Integer id;
     private String firstName;
     private String lastName;
@@ -22,6 +26,11 @@ public class Person {
     private LocalDate dateOfBirth;
     private String occupation;
     private boolean important;
+
+    @ManyToOne
+    private Employee supervisor;
+    @OneToMany(mappedBy = "supervisor")
+    private List<Employee> directs;
 
     public Integer getId() {
         return id;
@@ -87,4 +96,19 @@ public class Person {
         this.important = important;
     }
 
+    public Employee getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(Employee manager) {
+        this.supervisor = manager;
+    }
+
+    public List<Employee> getDirects() {
+        return directs;
+    }
+
+    public void setDirects(List<Employee> directs) {
+        this.directs = directs;
+    }
 }
