@@ -43,20 +43,24 @@ public class EmployeeDataGenerator implements CommandLineRunner {
         dataGenerator.setData(Employee::setOccupation, DataType.OCCUPATION);
         dataGenerator.setData(Employee::setImportant, DataType.BOOLEAN_10_90);
 
-        var boss = dataGenerator.create(1, 123).get(0);
+        int seed = 123;
+
+        var boss = dataGenerator.create(1, seed).get(0);
         employeeRepository.save(boss);
 
-        var managers = dataGenerator.create(2, 456);
+        seed = seed * 123;
+        var managers = dataGenerator.create(2, seed);
         employeeRepository.saveAll(managers);
 
-        managers.forEach(manager -> {
+        for (Employee manager : managers) {
             manager.setSupervisor(boss);
 
-            var employees = dataGenerator.create(5, 789);
+            seed = seed * 123;
+            var employees = dataGenerator.create(5, seed++);
             employees.forEach(employee -> employee.setSupervisor(manager));
 
             employeeRepository.saveAll(employees);
-        });
+        }
 
         employeeRepository.saveAll(managers);
 
