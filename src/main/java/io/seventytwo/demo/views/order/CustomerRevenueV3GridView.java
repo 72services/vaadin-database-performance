@@ -23,9 +23,9 @@ public class CustomerRevenueV3GridView extends Div {
         setHeightFull();
 
         var grid = new Grid<CustomerInfo>();
-        grid.addColumn(CustomerInfo::id).setHeader("ID").setSortable(true).setSortProperty("id");
-        grid.addColumn(CustomerInfo::firstname).setHeader("First Name").setSortable(true).setSortProperty("firstname");
-        grid.addColumn(CustomerInfo::lastname).setHeader("Last Name").setSortable(true).setSortProperty("lastname");
+        grid.addColumn(CustomerInfo::id).setHeader("ID").setSortable(true).setSortProperty(CUSTOMER.ID.getName());
+        grid.addColumn(CustomerInfo::firstname).setHeader("First Name").setSortable(true).setSortProperty(CUSTOMER.FIRSTNAME.getName());
+        grid.addColumn(CustomerInfo::lastname).setHeader("Last Name").setSortable(true).setSortProperty(CUSTOMER.LASTNAME.getName());
         grid.addColumn(CustomerInfo::revenue).setHeader("Revenue");
 
         grid.setItems(

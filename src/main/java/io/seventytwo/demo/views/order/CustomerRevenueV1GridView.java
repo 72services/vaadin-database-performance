@@ -27,8 +27,7 @@ public class CustomerRevenueV1GridView extends Div {
         grid.setItems(
                 query -> customerRepository
                         .findAll(PageRequest.of(query.getPage(), query.getPageSize(), toSpringDataSort(query)))
-                        .stream(),
-                query -> (int) customerRepository.count()
+                        .stream()
         );
 
         grid.setHeightFull();

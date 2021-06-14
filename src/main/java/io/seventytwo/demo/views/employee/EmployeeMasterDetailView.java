@@ -1,8 +1,5 @@
 package io.seventytwo.demo.views.employee;
 
-import io.seventytwo.demo.model.employee.control.EmployeeService;
-import io.seventytwo.demo.model.employee.entity.Employee;
-import io.seventytwo.demo.views.layout.ApplicationLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.UI;
@@ -27,6 +24,9 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
+import io.seventytwo.demo.model.employee.control.EmployeeService;
+import io.seventytwo.demo.model.employee.entity.Employee;
+import io.seventytwo.demo.views.layout.ApplicationLayout;
 import org.springframework.data.domain.PageRequest;
 
 @RouteAlias(value = "", layout = ApplicationLayout.class)
@@ -34,14 +34,23 @@ import org.springframework.data.domain.PageRequest;
 @PageTitle("Employee Master-Detail")
 public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver {
 
+    private final String SAMPLE_EMPLOYEE_ID = "sampleEmployeeID";
     private final String SAMPLE_EMPLOYEE_EDIT_ROUTE_TEMPLATE = "master-detail/%d/edit";
 
     private final Grid<Employee> grid = new Grid<>(Employee.class, false);
 
-    private final Button cancel = new Button("Cancel");
-    private final Button save = new Button("Save");
+    private TextField firstName;
+    private TextField lastName;
+    private TextField email;
+    private TextField phone;
+    private DatePicker dateOfBirth;
+    private TextField occupation;
+    private Checkbox important;
 
-    private final BeanValidationBinder<Employee> binder;
+    private Button cancel = new Button("Cancel");
+    private Button save = new Button("Save");
+
+    private BeanValidationBinder<Employee> binder;
 
     private Employee employee;
 
@@ -69,12 +78,12 @@ public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver
         grid.addColumn("dateOfBirth").setAutoWidth(true);
         grid.addColumn("occupation").setAutoWidth(true);
         var importantRenderer = TemplateRenderer.<Employee>of(
-                "<iron-icon hidden='[[!item.important]]' icon='vaadin:check' style='width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: var(--lumo-primary-text-color);'></iron-icon><iron-icon hidden='[[item.important]]' icon='vaadin:minus' style='width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: var(--lumo-disabled-text-color);'></iron-icon>")
+                        "<iron-icon hidden='[[!item.important]]' icon='vaadin:check' style='width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: var(--lumo-primary-text-color);'></iron-icon><iron-icon hidden='[[item.important]]' icon='vaadin:minus' style='width: var(--lumo-icon-size-s); height: var(--lumo-icon-size-s); color: var(--lumo-disabled-text-color);'></iron-icon>")
                 .withProperty("important", Employee::isImportant);
         grid.addColumn(importantRenderer).setHeader("Important").setAutoWidth(true);
 
         grid.setItems(query -> employeeService.list(
-                PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
+                        PageRequest.of(query.getPage(), query.getPageSize(), VaadinSpringDataHelpers.toSpringDataSort(query)))
                 .stream());
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.setHeightFull();
@@ -122,7 +131,6 @@ public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
-        String SAMPLE_EMPLOYEE_ID = "sampleEmployeeID";
         var sampleEmployeeId = event.getRouteParameters().getInteger(SAMPLE_EMPLOYEE_ID);
         if (sampleEmployeeId.isPresent()) {
             var sampleEmployeeFromBackend = employeeService.get(sampleEmployeeId.get());
@@ -132,7 +140,8 @@ public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver
                 Notification.show(
                         String.format("The requested sampleEmployee was not found, ID = %d", sampleEmployeeId.get()), 3000,
                         Notification.Position.BOTTOM_START);
-                // when a row is selected, but the data is no longer available, refresh grid
+                // when a row is selected but the data is no longer available,
+                // refresh grid
                 refreshGrid();
                 event.forwardTo(EmployeeMasterDetailView.class);
             }
@@ -148,13 +157,13 @@ public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver
         editorLayoutDiv.add(editorDiv);
 
         var formLayout = new FormLayout();
-        TextField firstName = new TextField("First Name");
-        TextField lastName = new TextField("Last Name");
-        TextField email = new TextField("Email");
-        TextField phone = new TextField("Phone");
-        DatePicker dateOfBirth = new DatePicker("Date Of Birth");
-        TextField occupation = new TextField("Occupation");
-        Checkbox important = new Checkbox("Important");
+        firstName = new TextField("First Name");
+        lastName = new TextField("Last Name");
+        email = new TextField("Email");
+        phone = new TextField("Phone");
+        dateOfBirth = new DatePicker("Date Of Birth");
+        occupation = new TextField("Occupation");
+        important = new Checkbox("Important");
         important.getStyle().set("padding-top", "var(--lumo-space-m)");
         Component[] fields = new Component[]{firstName, lastName, email, phone, dateOfBirth, occupation, important};
 
@@ -201,4 +210,3 @@ public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver
         binder.readBean(this.employee);
     }
 }
-
