@@ -18,12 +18,12 @@ import org.springframework.data.domain.PageRequest;
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringDataSort;
 
 @Route(value = "v4", layout = ApplicationLayout.class)
-@PageTitle("Customers Revenue (Version 4)")
-public class CustomerRevenueV4GridView extends VerticalLayout {
+@PageTitle("Customers Revenue with FilteringCallback")
+public class CustomerRevenueFilteringGridView extends VerticalLayout {
 
     private final ConfigurableFilterDataProvider<CustomerInfo, Void, String> dataProvider;
 
-    public CustomerRevenueV4GridView(CustomerRepository customerRepository) {
+    public CustomerRevenueFilteringGridView(CustomerRepository customerRepository) {
         setHeightFull();
 
         CallbackDataProvider<CustomerInfo, String> callbackDataProvider = DataProvider.fromFilteringCallbacks(

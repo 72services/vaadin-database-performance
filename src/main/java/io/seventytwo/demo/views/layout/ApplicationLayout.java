@@ -1,8 +1,8 @@
 package io.seventytwo.demo.views.layout;
 
 import io.seventytwo.demo.views.employee.EmployeeTreeView;
-import io.seventytwo.demo.views.order.CustomerRevenueV1GridView;
-import io.seventytwo.demo.views.order.CustomerRevenueV2GridView;
+import io.seventytwo.demo.views.order.CustomerRevenueEntityGridView;
+import io.seventytwo.demo.views.order.CustomerRevenueDtoGridView;
 import io.seventytwo.demo.views.employee.EmployeeMasterDetailView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
@@ -19,8 +19,8 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
-import io.seventytwo.demo.views.order.CustomerRevenueV3GridView;
-import io.seventytwo.demo.views.order.CustomerRevenueV4GridView;
+import io.seventytwo.demo.views.order.CustomerRevenueJooqGridView;
+import io.seventytwo.demo.views.order.CustomerRevenueFilteringGridView;
 
 import java.util.Optional;
 
@@ -84,10 +84,10 @@ public class ApplicationLayout extends AppLayout {
         return new Tab[]{
                 createTab("Employees", EmployeeMasterDetailView.class),
                 createTab("Employee Tree", EmployeeTreeView.class),
-                createTab("Customers Revenue (Version 1)", CustomerRevenueV1GridView.class),
-                createTab("Customers Revenue (Version 2)", CustomerRevenueV2GridView.class),
-                createTab("Customers Revenue (Version 3)", CustomerRevenueV3GridView.class),
-                createTab("Customers Revenue (Version 4)", CustomerRevenueV4GridView.class)
+                createTab("Customers Revenue with Entities", CustomerRevenueEntityGridView.class),
+                createTab("Customers Revenue with DTOs", CustomerRevenueDtoGridView.class),
+                createTab("Customers Revenue with jOOQ", CustomerRevenueJooqGridView.class),
+                createTab("Customers Revenue with Filtering", CustomerRevenueFilteringGridView.class)
         };
     }
 

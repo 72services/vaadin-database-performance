@@ -13,15 +13,15 @@ import org.springframework.data.domain.PageRequest;
 
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringDataSort;
 
-@Route(value = "v2", layout = ApplicationLayout.class)
-@PageTitle("Customers Revenue (Version 2)")
-public class CustomerRevenueV2GridView extends VerticalLayout {
+@Route(value = "dto", layout = ApplicationLayout.class)
+@PageTitle("Customers Revenue with DTOs")
+public class CustomerRevenueDtoGridView extends VerticalLayout {
 
     private final CustomerRepository customerRepository;
     private final Grid<CustomerInfo> grid;
     private final TextField filter;
 
-    public CustomerRevenueV2GridView(CustomerRepository customerRepository) {
+    public CustomerRevenueDtoGridView(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
 
         setHeightFull();

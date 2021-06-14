@@ -14,14 +14,14 @@ import org.springframework.data.domain.PageRequest;
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringDataSort;
 
 @Route(value = "v1", layout = ApplicationLayout.class)
-@PageTitle("Customers Revenue (Version 1)")
-public class CustomerRevenueV1GridView extends VerticalLayout {
+@PageTitle("Customers Revenue with Entities")
+public class CustomerRevenueEntityGridView extends VerticalLayout {
 
     private final CustomerRepository customerRepository;
     private final Grid<Customer> grid;
     private final TextField filter;
 
-    public CustomerRevenueV1GridView(CustomerRepository customerRepository) {
+    public CustomerRevenueEntityGridView(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
 
         setHeightFull();

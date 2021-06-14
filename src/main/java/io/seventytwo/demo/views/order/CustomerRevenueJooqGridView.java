@@ -20,14 +20,14 @@ import static io.seventytwo.demo.database.tables.PurchaseOrder.PURCHASE_ORDER;
 import static org.jooq.impl.DSL.lower;
 
 @Route(value = "v3", layout = ApplicationLayout.class)
-@PageTitle("Customers Revenue (Version 3)")
-public class CustomerRevenueV3GridView extends VerticalLayout {
+@PageTitle("Customers Revenue with jOOQ")
+public class CustomerRevenueJooqGridView extends VerticalLayout {
 
     private final DSLContext dsl;
     private final Grid<CustomerInfo> grid;
     private final TextField filter;
 
-    public CustomerRevenueV3GridView(DSLContext dsl) {
+    public CustomerRevenueJooqGridView(DSLContext dsl) {
         this.dsl = dsl;
 
         setHeightFull();
