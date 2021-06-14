@@ -4,7 +4,6 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import io.seventytwo.demo.database.tables.Product;
 import io.seventytwo.demo.model.order.entity.CustomerInfo;
 import io.seventytwo.demo.views.layout.ApplicationLayout;
 import io.seventytwo.vaadinjooq.util.VaadinJooqUtil;

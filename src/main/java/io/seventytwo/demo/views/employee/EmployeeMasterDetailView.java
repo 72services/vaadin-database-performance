@@ -34,30 +34,21 @@ import org.springframework.data.domain.PageRequest;
 @PageTitle("Employee Master-Detail")
 public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver {
 
-    private final String SAMPLE_EMPLOYEE_ID = "sampleEmployeeID";
     private final String SAMPLE_EMPLOYEE_EDIT_ROUTE_TEMPLATE = "master-detail/%d/edit";
 
     private final Grid<Employee> grid = new Grid<>(Employee.class, false);
 
-    private TextField firstName;
-    private TextField lastName;
-    private TextField email;
-    private TextField phone;
-    private DatePicker dateOfBirth;
-    private TextField occupation;
-    private Checkbox important;
+    private final Button cancel = new Button("Cancel");
+    private final Button save = new Button("Save");
 
-    private Button cancel = new Button("Cancel");
-    private Button save = new Button("Save");
-
-    private BeanValidationBinder<Employee> binder;
+    private final BeanValidationBinder<Employee> binder;
 
     private Employee employee;
 
-    private EmployeeService EmployeeService;
+    private final EmployeeService employeeService;
 
     public EmployeeMasterDetailView(EmployeeService employeeService) {
-        this.EmployeeService = employeeService;
+        this.employeeService = employeeService;
 
         addClassName("master-detail-view");
 
@@ -131,17 +122,17 @@ public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver
 
     @Override
     public void beforeEnter(BeforeEnterEvent event) {
+        String SAMPLE_EMPLOYEE_ID = "sampleEmployeeID";
         var sampleEmployeeId = event.getRouteParameters().getInteger(SAMPLE_EMPLOYEE_ID);
         if (sampleEmployeeId.isPresent()) {
-            var sampleEmployeeFromBackend = EmployeeService.get(sampleEmployeeId.get());
+            var sampleEmployeeFromBackend = employeeService.get(sampleEmployeeId.get());
             if (sampleEmployeeFromBackend.isPresent()) {
                 populateForm(sampleEmployeeFromBackend.get());
             } else {
                 Notification.show(
                         String.format("The requested sampleEmployee was not found, ID = %d", sampleEmployeeId.get()), 3000,
                         Notification.Position.BOTTOM_START);
-                // when a row is selected but the data is no longer available,
-                // refresh grid
+                // when a row is selected, but the data is no longer available, refresh grid
                 refreshGrid();
                 event.forwardTo(EmployeeMasterDetailView.class);
             }
@@ -157,13 +148,13 @@ public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver
         editorLayoutDiv.add(editorDiv);
 
         var formLayout = new FormLayout();
-        firstName = new TextField("First Name");
-        lastName = new TextField("Last Name");
-        email = new TextField("Email");
-        phone = new TextField("Phone");
-        dateOfBirth = new DatePicker("Date Of Birth");
-        occupation = new TextField("Occupation");
-        important = new Checkbox("Important");
+        TextField firstName = new TextField("First Name");
+        TextField lastName = new TextField("Last Name");
+        TextField email = new TextField("Email");
+        TextField phone = new TextField("Phone");
+        DatePicker dateOfBirth = new DatePicker("Date Of Birth");
+        TextField occupation = new TextField("Occupation");
+        Checkbox important = new Checkbox("Important");
         important.getStyle().set("padding-top", "var(--lumo-space-m)");
         Component[] fields = new Component[]{firstName, lastName, email, phone, dateOfBirth, occupation, important};
 

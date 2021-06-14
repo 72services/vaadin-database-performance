@@ -1,14 +1,11 @@
 package io.seventytwo.demo.model.order.control;
 
 import io.seventytwo.demo.model.order.entity.CustomerInfo;
-import io.seventytwo.vaadinjooq.util.VaadinJooqUtil;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
