@@ -50,7 +50,7 @@ public class CustomerRevenueV1GridView extends VerticalLayout {
         grid.setItems(
                 query -> customerRepository.findAllByLastnameLikeOrFirstnameLike(
                         PageRequest.of(query.getPage(), query.getPageSize(), toSpringDataSort(query)),
-                        filter.getValue() + "%", filter.getValue() + "%").stream()
+                        filter.getValue() + "%").stream()
         );
     }
 

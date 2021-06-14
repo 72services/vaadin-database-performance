@@ -20,6 +20,7 @@ import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import io.seventytwo.demo.views.order.CustomerRevenueV3GridView;
+import io.seventytwo.demo.views.order.CustomerRevenueV4GridView;
 
 import java.util.Optional;
 
@@ -85,7 +86,8 @@ public class ApplicationLayout extends AppLayout {
                 createTab("Employee Tree", EmployeeTreeView.class),
                 createTab("Customers Revenue (Version 1)", CustomerRevenueV1GridView.class),
                 createTab("Customers Revenue (Version 2)", CustomerRevenueV2GridView.class),
-                createTab("Customers Revenue (Version 3)", CustomerRevenueV3GridView.class)
+                createTab("Customers Revenue (Version 3)", CustomerRevenueV3GridView.class),
+                createTab("Customers Revenue (Version 4)", CustomerRevenueV4GridView.class)
         };
     }
 
