@@ -22,6 +22,7 @@ public class CustomerRevenueFilteringGridView extends VerticalLayout {
 
     private final ConfigurableFilterDataProvider<CustomerInfo, Void, String> dataProvider;
 
+    @SuppressWarnings("deprecated")
     public CustomerRevenueFilteringGridView(CustomerRepository customerRepository) {
         setHeightFull();
 
@@ -51,7 +52,6 @@ public class CustomerRevenueFilteringGridView extends VerticalLayout {
         grid.addColumn(CustomerInfo::lastname).setHeader("Last Name").setSortable(true).setSortProperty("lastname");
         grid.addColumn(CustomerInfo::revenue).setHeader("Revenue");
 
-        //noinspection deprecation
         grid.setDataProvider(dataProvider);
 
         add(grid);

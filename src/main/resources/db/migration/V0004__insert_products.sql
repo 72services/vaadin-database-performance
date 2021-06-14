@@ -1,1 +1,0 @@
-INSERT INTO public.product (id, name, price) VALUES (202, 'Pencil', 2.5);
