@@ -8,7 +8,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 class CustomerRepositoryTest {
@@ -20,6 +20,6 @@ class CustomerRepositoryTest {
     void findAllCustomersWithRevenue() {
         List<CustomerInfo> customers = customerRepository.findAllCustomersWithRevenue(PageRequest.of(1, 50));
 
-        assertEquals(0, customers.size());
+        assertThat(customers.size()).isEqualTo(50);
     }
 }
