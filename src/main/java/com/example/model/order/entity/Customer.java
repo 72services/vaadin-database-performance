@@ -23,7 +23,7 @@ public class Customer {
     @Id
     @SequenceGenerator(name = "customer_seq", sequenceName = "customer_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq")
-    private Long id;
+    private Integer id;
 
     private String firstname;
     private String lastname;
@@ -33,11 +33,11 @@ public class Customer {
     @JoinColumn(name = "customer_id")
     private List<Order> orders = new ArrayList<>();
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

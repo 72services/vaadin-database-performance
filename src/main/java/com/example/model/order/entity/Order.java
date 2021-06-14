@@ -21,7 +21,7 @@ public class Order {
     @Id
     @SequenceGenerator(name = "purchase_order_seq", sequenceName = "purchase_order_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchase_order_seq")
-    private Long id;
+    private Integer id;
 
     private LocalDate orderDate;
 
@@ -29,11 +29,11 @@ public class Order {
     @JoinColumn(name = "order_id", nullable = false)
     private List<OrderItem> items = new ArrayList<>();
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -13,18 +13,18 @@ public class OrderItem {
     @Id
     @SequenceGenerator(name = "order_item_seq", sequenceName = "order_item_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_item_seq")
-    private Long id;
+    private Integer id;
 
     private int quantity;
 
     @ManyToOne
     private Product product;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

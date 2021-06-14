@@ -15,17 +15,17 @@ public class Product {
     @Id
     @SequenceGenerator(name = "product_seq", sequenceName = "product_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
-    private Long id;
+    private Integer id;
 
     private String name;
 
     private double price;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
