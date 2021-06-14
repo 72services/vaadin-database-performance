@@ -4,16 +4,14 @@ This is an example project for my talk **High-performance data access with Vaadi
 
 The project is a standard Maven project, so you can import it to your IDE of choice. [Read more how to set up a development environment](https://vaadin.com/docs/v14/flow/installing/installing-overview.html) for Vaadin projects (Windows, Linux, macOS). 
 
-## Running and debugging the application
-
 ## Prerequisite
 
 ### Database
 
 The example application uses [PostgreSQL database](https://www.postgresql.org/). You need to install it locally or run it with [Docker](https://www.docker.com/get-started).
 
-Then create the database: 
-    
+Then create the database:
+
     create database vaadin;
     create user vaadin with encrypted password 'vaadin';
     grant all privileges on database vaadin to vaadin;
@@ -21,6 +19,10 @@ Then create the database:
 ### Java
 
 Java 16 is used. You can download it for example from [AdoptOpenJDK](https://adoptopenjdk.net/).
+
+## Running and debugging the application
+
+The first start will be a bit slower because testdata is inserted when starting the first time.
 
 ### Running the application from the command line.
 To run from the command line, use `mvn spring-boot:run` and open http://localhost:8080 in your browser.
