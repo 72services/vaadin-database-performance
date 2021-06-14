@@ -13,6 +13,7 @@ import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
@@ -32,7 +33,7 @@ import org.springframework.data.domain.PageRequest;
 @RouteAlias(value = "", layout = ApplicationLayout.class)
 @Route(value = "master-detail/:sampleEmployeeID?/:action?(edit)", layout = ApplicationLayout.class)
 @PageTitle("Employee Master-Detail")
-public class EmployeeMasterDetailView extends Div implements BeforeEnterObserver {
+public class EmployeeMasterDetailView extends VerticalLayout implements BeforeEnterObserver {
 
     private final String SAMPLE_EMPLOYEE_ID = "sampleEmployeeID";
     private final String SAMPLE_EMPLOYEE_EDIT_ROUTE_TEMPLATE = "master-detail/%d/edit";

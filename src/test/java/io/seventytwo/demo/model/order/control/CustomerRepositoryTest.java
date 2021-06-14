@@ -18,7 +18,7 @@ class CustomerRepositoryTest {
 
     @Test
     void findAllCustomersWithRevenue() {
-        List<CustomerInfo> customers = customerRepository.findAllCustomersWithRevenue(PageRequest.of(1, 50));
+        List<CustomerInfo> customers = customerRepository.findAllCustomersWithRevenue(PageRequest.of(1, 50), "");
 
         assertThat(customers.size()).isEqualTo(50);
     }
