@@ -1,7 +1,6 @@
 package io.seventytwo.demo.views.order;
 
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
@@ -54,26 +53,27 @@ public class CustomerRevenueV3GridView extends VerticalLayout {
     }
 
     private void loadData() {
-        grid.setItems(
-                query -> {
-                    Condition condition = DSL.noCondition();
-                    if (!filter.getValue().isBlank()) {
-                        condition = lower(CUSTOMER.LASTNAME).like(filter.getValue().toLowerCase() + "%")
-                                .or(lower(CUSTOMER.FIRSTNAME).like(filter.getValue().toLowerCase() + "%"));
-                    }
-                    return dsl
-                            .select(CUSTOMER.ID, CUSTOMER.LASTNAME, CUSTOMER.FIRSTNAME, DSL.sum(PRODUCT.PRICE))
-                            .from(CUSTOMER)
-                            .join(PURCHASE_ORDER).on(PURCHASE_ORDER.CUSTOMER_ID.eq(CUSTOMER.ID))
-                            .join(ORDER_ITEM).on((ORDER_ITEM.ORDER_ID.eq(PURCHASE_ORDER.ID)))
-                            .join(PRODUCT).on((PRODUCT.ID.eq(ORDER_ITEM.PRODUCT_ID)))
-                            .where(condition)
-                            .groupBy(CUSTOMER.ID)
-                            .orderBy(VaadinJooqUtil.orderFields(CUSTOMER, query))
-                            .offset(query.getOffset())
-                            .limit(query.getLimit())
-                            .fetchStreamInto(CustomerInfo.class);
-                }
+        grid.setItems(query -> dsl
+                .select(CUSTOMER.ID, CUSTOMER.LASTNAME, CUSTOMER.FIRSTNAME, DSL.sum(PRODUCT.PRICE))
+                .from(CUSTOMER)
+                .join(PURCHASE_ORDER).on(PURCHASE_ORDER.CUSTOMER_ID.eq(CUSTOMER.ID))
+                .join(ORDER_ITEM).on((ORDER_ITEM.ORDER_ID.eq(PURCHASE_ORDER.ID)))
+                .join(PRODUCT).on((PRODUCT.ID.eq(ORDER_ITEM.PRODUCT_ID)))
+                .where(createCondition())
+                .groupBy(CUSTOMER.ID)
+                .orderBy(VaadinJooqUtil.orderFields(CUSTOMER, query))
+                .offset(query.getOffset())
+                .limit(query.getLimit())
+                .fetchStreamInto(CustomerInfo.class)
         );
+    }
+
+    private Condition createCondition() {
+        Condition condition = DSL.noCondition();
+        if (!filter.getValue().isBlank()) {
+            condition = lower(CUSTOMER.LASTNAME).like(filter.getValue().toLowerCase() + "%")
+                    .or(lower(CUSTOMER.FIRSTNAME).like(filter.getValue().toLowerCase() + "%"));
+        }
+        return condition;
     }
 }
