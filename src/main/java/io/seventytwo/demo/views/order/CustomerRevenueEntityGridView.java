@@ -33,7 +33,7 @@ public class CustomerRevenueEntityGridView extends VerticalLayout {
 
         add(filter);
 
-        grid = new Grid<Customer>();
+        grid = new Grid<>();
         grid.addColumn(Customer::getId).setHeader("ID").setSortable(true).setSortProperty("id");
         grid.addColumn(Customer::getFirstname).setHeader("First Name").setSortable(true).setSortProperty("firstname");
         grid.addColumn(Customer::getLastname).setHeader("Last Name").setSortable(true).setSortProperty("lastname");

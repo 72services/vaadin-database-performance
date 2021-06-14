@@ -30,6 +30,7 @@ import io.seventytwo.demo.model.employee.entity.Employee;
 import io.seventytwo.demo.views.layout.ApplicationLayout;
 import org.springframework.data.domain.PageRequest;
 
+@SuppressWarnings("FieldCanBeLocal")
 @RouteAlias(value = "", layout = ApplicationLayout.class)
 @Route(value = "master-detail/:sampleEmployeeID?/:action?(edit)", layout = ApplicationLayout.class)
 @PageTitle("Employee Master-Detail")
@@ -48,10 +49,10 @@ public class EmployeeMasterDetailView extends VerticalLayout implements BeforeEn
     private TextField occupation;
     private Checkbox important;
 
-    private Button cancel = new Button("Cancel");
-    private Button save = new Button("Save");
+    private final Button cancel = new Button("Cancel");
+    private final Button save = new Button("Save");
 
-    private BeanValidationBinder<Employee> binder;
+    private final BeanValidationBinder<Employee> binder;
 
     private Employee employee;
 

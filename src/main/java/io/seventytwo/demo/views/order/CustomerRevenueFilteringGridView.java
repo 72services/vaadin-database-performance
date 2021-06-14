@@ -10,7 +10,6 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import io.seventytwo.demo.model.order.control.CustomerRepository;
-import io.seventytwo.demo.model.order.entity.Customer;
 import io.seventytwo.demo.model.order.entity.CustomerInfo;
 import io.seventytwo.demo.views.layout.ApplicationLayout;
 import org.springframework.data.domain.PageRequest;
@@ -52,6 +51,7 @@ public class CustomerRevenueFilteringGridView extends VerticalLayout {
         grid.addColumn(CustomerInfo::lastname).setHeader("Last Name").setSortable(true).setSortProperty("lastname");
         grid.addColumn(CustomerInfo::revenue).setHeader("Revenue");
 
+        //noinspection deprecation
         grid.setDataProvider(dataProvider);
 
         add(grid);
