@@ -18,7 +18,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             """)
     List<CustomerInfo> findAllCustomersWithRevenue(Pageable pageable, String name);
 
-    @Query("select c from Customer c join fetch c.orders o join fetch o.items i where lower(c.firstname) like :name% or lower(c.lastname) like :name%")
+    @Query("select c from Customer c where lower(c.firstname) like :name% or lower(c.lastname) like :name%")
     List<Customer> findAllByLastnameLikeOrFirstnameLike(Pageable pageable, String name);
 
     @Query("select count(c) from Customer c where lower(c.firstname) like :name% or lower(c.lastname) like :name%")

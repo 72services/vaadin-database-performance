@@ -24,7 +24,7 @@ public class Customer {
     private String firstname;
     private String lastname;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @OrderBy("orderDate DESC")
     @JoinColumn(name = "customer_id")
     private List<Order> orders = new ArrayList<>();

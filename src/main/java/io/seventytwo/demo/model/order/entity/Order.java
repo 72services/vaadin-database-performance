@@ -27,7 +27,7 @@ public class Order {
 
     private LocalDate orderDate;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id", nullable = false)
     private Set<OrderItem> items = new HashSet<>();
 
