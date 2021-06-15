@@ -13,7 +13,7 @@ import org.springframework.data.domain.PageRequest;
 
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringDataSort;
 
-@Route(value = "dto", layout = ApplicationLayout.class)
+@Route(value = "dtos", layout = ApplicationLayout.class)
 @PageTitle("Customers Revenue with DTOs")
 public class CustomerRevenueDtoGridView extends VerticalLayout {
 

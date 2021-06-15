@@ -13,7 +13,7 @@ import org.springframework.data.domain.PageRequest;
 
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringDataSort;
 
-@Route(value = "v1", layout = ApplicationLayout.class)
+@Route(value = "entities", layout = ApplicationLayout.class)
 @PageTitle("Customers Revenue with Entities")
 public class CustomerRevenueEntityGridView extends VerticalLayout {
 

@@ -19,7 +19,7 @@ import static io.seventytwo.demo.database.tables.Product.PRODUCT;
 import static io.seventytwo.demo.database.tables.PurchaseOrder.PURCHASE_ORDER;
 import static org.jooq.impl.DSL.lower;
 
-@Route(value = "v3", layout = ApplicationLayout.class)
+@Route(value = "jooq", layout = ApplicationLayout.class)
 @PageTitle("Customers Revenue with jOOQ")
 public class CustomerRevenueJooqGridView extends VerticalLayout {
 

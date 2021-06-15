@@ -16,7 +16,7 @@ import org.springframework.data.domain.PageRequest;
 
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringDataSort;
 
-@Route(value = "v4", layout = ApplicationLayout.class)
+@Route(value = "filtering", layout = ApplicationLayout.class)
 @PageTitle("Customers Revenue with FilteringCallback")
 public class CustomerRevenueFilteringGridView extends VerticalLayout {
 
