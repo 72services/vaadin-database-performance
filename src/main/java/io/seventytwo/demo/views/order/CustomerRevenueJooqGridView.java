@@ -25,16 +25,15 @@ public class CustomerRevenueJooqGridView extends VerticalLayout {
 
     private final DSLContext dsl;
     private final Grid<CustomerInfo> grid;
-    private final TextField filter;
 
     public CustomerRevenueJooqGridView(DSLContext dsl) {
         this.dsl = dsl;
 
         setHeightFull();
 
-        filter = new TextField();
+        TextField filter = new TextField();
         filter.setValueChangeMode(ValueChangeMode.LAZY);
-        filter.addValueChangeListener(event -> loadData());
+        filter.addValueChangeListener(event -> loadData(event.getValue()));
         filter.setPlaceholder("Search");
 
         add(filter);
@@ -47,19 +46,19 @@ public class CustomerRevenueJooqGridView extends VerticalLayout {
 
         grid.setHeightFull();
 
-        loadData();
+        loadData("");
 
         add(grid);
     }
 
-    private void loadData() {
+    private void loadData(String name) {
         grid.setItems(query -> dsl
                 .select(CUSTOMER.ID, CUSTOMER.LASTNAME, CUSTOMER.FIRSTNAME, DSL.sum(PRODUCT.PRICE))
                 .from(CUSTOMER)
                 .join(PURCHASE_ORDER).on(PURCHASE_ORDER.CUSTOMER_ID.eq(CUSTOMER.ID))
                 .join(ORDER_ITEM).on((ORDER_ITEM.ORDER_ID.eq(PURCHASE_ORDER.ID)))
                 .join(PRODUCT).on((PRODUCT.ID.eq(ORDER_ITEM.PRODUCT_ID)))
-                .where(createCondition())
+                .where(createCondition(name))
                 .groupBy(CUSTOMER.ID)
                 .orderBy(VaadinJooqUtil.orderFields(CUSTOMER, query))
                 .offset(query.getOffset())
@@ -68,11 +67,11 @@ public class CustomerRevenueJooqGridView extends VerticalLayout {
         );
     }
 
-    private Condition createCondition() {
+    private Condition createCondition(String name) {
         Condition condition = DSL.noCondition();
-        if (!filter.getValue().isBlank()) {
-            condition = lower(CUSTOMER.LASTNAME).like(filter.getValue().toLowerCase() + "%")
-                    .or(lower(CUSTOMER.FIRSTNAME).like(filter.getValue().toLowerCase() + "%"));
+        if (!name.isBlank()) {
+            condition = lower(CUSTOMER.LASTNAME).like(name.toLowerCase() + "%")
+                    .or(lower(CUSTOMER.FIRSTNAME).like(name.toLowerCase() + "%"));
         }
         return condition;
     }

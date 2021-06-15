@@ -19,16 +19,15 @@ public class CustomerRevenueEntityGridView extends VerticalLayout {
 
     private final CustomerRepository customerRepository;
     private final Grid<Customer> grid;
-    private final TextField filter;
 
     public CustomerRevenueEntityGridView(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
 
         setHeightFull();
 
-        filter = new TextField();
+        TextField filter = new TextField();
         filter.setValueChangeMode(ValueChangeMode.LAZY);
-        filter.addValueChangeListener(event -> loadData());
+        filter.addValueChangeListener(event -> loadData(event.getValue()));
         filter.setPlaceholder("Search");
 
         add(filter);
@@ -39,18 +38,17 @@ public class CustomerRevenueEntityGridView extends VerticalLayout {
         grid.addColumn(Customer::getLastname).setHeader("Last Name").setSortable(true).setSortProperty("lastname");
         grid.addColumn(Customer::getRevenue).setHeader("Revenue");
 
-        loadData();
+        loadData("");
 
         grid.setHeightFull();
 
         add(grid);
     }
 
-    private void loadData() {
+    private void loadData(String name) {
         grid.setItems(
                 query -> customerRepository.findAllByLastnameLikeOrFirstnameLike(
-                        PageRequest.of(query.getPage(), query.getPageSize(), toSpringDataSort(query)),
-                        filter.getValue() + "%").stream()
+                        PageRequest.of(query.getPage(), query.getPageSize(), toSpringDataSort(query)), name + "%").stream()
         );
     }
 

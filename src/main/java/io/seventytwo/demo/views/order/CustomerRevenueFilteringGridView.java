@@ -22,7 +22,6 @@ public class CustomerRevenueFilteringGridView extends VerticalLayout {
 
     private final ConfigurableFilterDataProvider<CustomerInfo, Void, String> dataProvider;
 
-    @SuppressWarnings("deprecated")
     public CustomerRevenueFilteringGridView(CustomerRepository customerRepository) {
         setHeightFull();
 
@@ -37,10 +36,7 @@ public class CustomerRevenueFilteringGridView extends VerticalLayout {
         filter.setValueChangeMode(ValueChangeMode.LAZY);
         filter.setPlaceholder("Search");
 
-        filter.addValueChangeListener(event -> {
-            dataProvider.setFilter(event.getValue());
-            dataProvider.refreshAll();
-        });
+        filter.addValueChangeListener(event -> dataProvider.setFilter(event.getValue()));
 
         add(filter);
 
