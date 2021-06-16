@@ -31,7 +31,6 @@ import io.seventytwo.demo.views.layout.ApplicationLayout;
 import org.springframework.data.domain.PageRequest;
 
 @SuppressWarnings("FieldCanBeLocal")
-@RouteAlias(value = "", layout = ApplicationLayout.class)
 @Route(value = "master-detail/:sampleEmployeeID?/:action?(edit)", layout = ApplicationLayout.class)
 @PageTitle("Employee Master-Detail")
 public class EmployeeMasterDetailView extends VerticalLayout implements BeforeEnterObserver {

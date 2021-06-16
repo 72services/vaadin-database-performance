@@ -16,19 +16,19 @@ import org.springframework.data.domain.PageRequest;
 
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringDataSort;
 
-@Route(value = "filtering", layout = ApplicationLayout.class)
-@PageTitle("Customers Revenue with FilteringCallback")
-public class CustomerRevenueFilteringGridView extends VerticalLayout {
+@Route(value = "customer-revenue-jpa-filter-data-provider", layout = ApplicationLayout.class)
+@PageTitle("Customer Revenue with FilterDataProvider")
+public class CustomerRevenueV30FilterView extends VerticalLayout {
 
     private final ConfigurableFilterDataProvider<CustomerInfo, Void, String> dataProvider;
 
-    public CustomerRevenueFilteringGridView(CustomerRepository customerRepository) {
+    public CustomerRevenueV30FilterView(CustomerRepository customerRepository) {
         setHeightFull();
 
         CallbackDataProvider<CustomerInfo, String> callbackDataProvider = DataProvider.fromFilteringCallbacks(
                 query -> customerRepository.findAllCustomersWithRevenue(
                         PageRequest.of(query.getPage(), query.getPageSize(), toSpringDataSort(query)), query.getFilter().orElse("")).stream(),
-                query -> customerRepository.countAllByLastnameLikeOrFirstnameLike(query.getFilter().orElse("")));
+                query -> customerRepository.countCustomersWithRevenue(query.getFilter().orElse("")));
 
         dataProvider = callbackDataProvider.withConfigurableFilter();
 

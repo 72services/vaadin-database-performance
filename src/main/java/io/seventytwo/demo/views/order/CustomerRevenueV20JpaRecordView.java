@@ -7,20 +7,20 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import io.seventytwo.demo.model.order.control.CustomerRepository;
-import io.seventytwo.demo.model.order.entity.Customer;
+import io.seventytwo.demo.model.order.entity.CustomerInfo;
 import io.seventytwo.demo.views.layout.ApplicationLayout;
 import org.springframework.data.domain.PageRequest;
 
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringDataSort;
 
-@Route(value = "entities", layout = ApplicationLayout.class)
-@PageTitle("Customers Revenue with Entities")
-public class CustomerRevenueEntityGridView extends VerticalLayout {
+@Route(value = "customer-revenue-jpa-records", layout = ApplicationLayout.class)
+@PageTitle("Customer Revenue JPA Records")
+public class CustomerRevenueV20JpaRecordView extends VerticalLayout {
 
     private final CustomerRepository customerRepository;
-    private final Grid<Customer> grid;
+    private final Grid<CustomerInfo> grid;
 
-    public CustomerRevenueEntityGridView(CustomerRepository customerRepository) {
+    public CustomerRevenueV20JpaRecordView(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
 
         setHeightFull();
@@ -33,10 +33,10 @@ public class CustomerRevenueEntityGridView extends VerticalLayout {
         add(filter);
 
         grid = new Grid<>();
-        grid.addColumn(Customer::getId).setHeader("ID").setSortable(true).setSortProperty("id");
-        grid.addColumn(Customer::getFirstname).setHeader("First Name").setSortable(true).setSortProperty("firstname");
-        grid.addColumn(Customer::getLastname).setHeader("Last Name").setSortable(true).setSortProperty("lastname");
-        grid.addColumn(Customer::getRevenue).setHeader("Revenue");
+        grid.addColumn(CustomerInfo::id).setHeader("ID").setSortable(true).setSortProperty("id");
+        grid.addColumn(CustomerInfo::firstname).setHeader("First Name").setSortable(true).setSortProperty("firstname");
+        grid.addColumn(CustomerInfo::lastname).setHeader("Last Name").setSortable(true).setSortProperty("lastname");
+        grid.addColumn(CustomerInfo::revenue).setHeader("Revenue");
 
         loadData("");
 
@@ -47,9 +47,9 @@ public class CustomerRevenueEntityGridView extends VerticalLayout {
 
     private void loadData(String name) {
         grid.setItems(
-                query -> customerRepository.findAllByLastnameLikeOrFirstnameLike(
-                        PageRequest.of(query.getPage(), query.getPageSize(), toSpringDataSort(query)), name + "%").stream()
+                query -> customerRepository.findAllCustomersWithRevenue(
+                        PageRequest.of(query.getPage(), query.getPageSize(), toSpringDataSort(query)), name).stream(),
+                query -> customerRepository.countCustomersWithRevenue(name)
         );
     }
-
 }

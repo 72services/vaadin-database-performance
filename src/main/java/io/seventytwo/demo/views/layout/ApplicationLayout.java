@@ -1,8 +1,12 @@
 package io.seventytwo.demo.views.layout;
 
 import io.seventytwo.demo.views.employee.EmployeeTreeView;
-import io.seventytwo.demo.views.order.CustomerRevenueEntityGridView;
-import io.seventytwo.demo.views.order.CustomerRevenueDtoGridView;
+import io.seventytwo.demo.views.hello.HelloView;
+import io.seventytwo.demo.views.order.CustomerRevenueV10JpaView;
+import io.seventytwo.demo.views.order.CustomerRevenueV11JpaPagingView;
+import io.seventytwo.demo.views.order.CustomerRevenueV12JpaCountView;
+import io.seventytwo.demo.views.order.CustomerRevenueV13JpaEstimateView;
+import io.seventytwo.demo.views.order.CustomerRevenueV20JpaRecordView;
 import io.seventytwo.demo.views.employee.EmployeeMasterDetailView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
@@ -19,8 +23,8 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
-import io.seventytwo.demo.views.order.CustomerRevenueJooqGridView;
-import io.seventytwo.demo.views.order.CustomerRevenueFilteringGridView;
+import io.seventytwo.demo.views.order.CustomerRevenueV40JooqView;
+import io.seventytwo.demo.views.order.CustomerRevenueV30FilterView;
 
 import java.util.Optional;
 
@@ -82,12 +86,16 @@ public class ApplicationLayout extends AppLayout {
 
     private Component[] createMenuItems() {
         return new Tab[]{
-                createTab("Employees", EmployeeMasterDetailView.class),
-                createTab("Employee Tree", EmployeeTreeView.class),
-                createTab("Customers Revenue with Entities", CustomerRevenueEntityGridView.class),
-                createTab("Customers Revenue with DTOs", CustomerRevenueDtoGridView.class),
-                createTab("Customers Revenue with jOOQ", CustomerRevenueJooqGridView.class),
-                createTab("Customers Revenue with Filtering", CustomerRevenueFilteringGridView.class)
+                createTab("Hello", HelloView.class),
+                createTab("Customer Revenue List", CustomerRevenueV10JpaView.class),
+                createTab("Customer Revenue Paging", CustomerRevenueV11JpaPagingView.class),
+                createTab("Customer Revenue Count", CustomerRevenueV12JpaCountView.class),
+                createTab("Customer Revenue Estimate", CustomerRevenueV13JpaEstimateView.class),
+                createTab("Customer Revenue Records", CustomerRevenueV20JpaRecordView.class),
+                createTab("Customer Revenue Filter", CustomerRevenueV30FilterView.class),
+                createTab("Customer Revenue jOOQ", CustomerRevenueV40JooqView.class),
+                createTab("Employee Grid", EmployeeMasterDetailView.class),
+                createTab("Employee Tree", EmployeeTreeView.class)
         };
     }
 
