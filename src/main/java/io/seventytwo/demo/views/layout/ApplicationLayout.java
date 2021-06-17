@@ -68,8 +68,8 @@ public class ApplicationLayout extends AppLayout {
         var logoLayout = new HorizontalLayout();
         logoLayout.setId("logo");
         logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
-        logoLayout.add(new Image("images/logo.png", "My App logo"));
-        logoLayout.add(new H1("My App"));
+        logoLayout.add(new Image("images/logo.png", "Logo"));
+        logoLayout.add(new H1("ERP"));
 
         layout.add(logoLayout, menu);
         return layout;
