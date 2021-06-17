@@ -17,12 +17,12 @@ import org.springframework.data.domain.PageRequest;
 import static com.vaadin.flow.spring.data.VaadinSpringDataHelpers.toSpringDataSort;
 
 @Route(value = "customer-revenue-jpa-filter-data-provider", layout = ApplicationLayout.class)
-@PageTitle("Customer Revenue with FilterDataProvider")
-public class CustomerRevenueV30FilterView extends VerticalLayout {
+@PageTitle("Customer Revenue with Configurable Filter")
+public class CustomerRevenueV30LegacyFilterView extends VerticalLayout {
 
     private final ConfigurableFilterDataProvider<CustomerInfo, Void, String> dataProvider;
 
-    public CustomerRevenueV30FilterView(CustomerRepository customerRepository) {
+    public CustomerRevenueV30LegacyFilterView(CustomerRepository customerRepository) {
         setHeightFull();
 
         CallbackDataProvider<CustomerInfo, String> callbackDataProvider = DataProvider.fromFilteringCallbacks(

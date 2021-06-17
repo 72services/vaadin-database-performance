@@ -24,7 +24,7 @@ import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.RouterLink;
 import io.seventytwo.demo.views.order.CustomerRevenueV40JooqView;
-import io.seventytwo.demo.views.order.CustomerRevenueV30FilterView;
+import io.seventytwo.demo.views.order.CustomerRevenueV30LegacyFilterView;
 
 import java.util.Optional;
 
@@ -92,7 +92,7 @@ public class ApplicationLayout extends AppLayout {
                 createTab("Customer Revenue Count", CustomerRevenueV12JpaCountView.class),
                 createTab("Customer Revenue Estimate", CustomerRevenueV13JpaEstimateView.class),
                 createTab("Customer Revenue Records", CustomerRevenueV20JpaRecordView.class),
-                createTab("Customer Revenue Filter", CustomerRevenueV30FilterView.class),
+                createTab("Customer Revenue Filter", CustomerRevenueV30LegacyFilterView.class),
                 createTab("Customer Revenue jOOQ", CustomerRevenueV40JooqView.class),
                 createTab("Employee Grid", EmployeeMasterDetailView.class),
                 createTab("Employee Tree", EmployeeTreeView.class)
