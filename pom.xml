@@ -166,7 +166,7 @@
                             <properties>
                                 <property>
                                     <key>scripts</key>
-                                    <value>src/main/resources/db/migration/*.sql</value>
+                                    <value>src/main/resources/db/migration/*.ddl.sql</value>
                                 </property>
                                 <property>
                                     <key>sort</key>

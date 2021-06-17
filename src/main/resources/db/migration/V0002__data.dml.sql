@@ -1,5 +1,3 @@
-/* [jooq ignore start] */
-
 -- Employees
 
 INSERT INTO employee (id, date_of_birth, email, first_name, important, last_name, occupation, phone, supervisor_id) VALUES (1, '1951-11-08', 'eula.lane@jigrormo.ye', 'Eula', false, 'Lane', 'Insurance Clerk', '(762) 526-5961', null);
@@ -17530,5 +17528,3 @@ INSERT INTO order_item (id, quantity, product_id, order_id) VALUES (32442, 7, 20
 INSERT INTO order_item (id, quantity, product_id, order_id) VALUES (32443, 7, 202, 6231);
 INSERT INTO order_item (id, quantity, product_id, order_id) VALUES (32444, 7, 202, 6231);
 INSERT INTO order_item (id, quantity, product_id, order_id) VALUES (32445, 7, 202, 6231);
-
-/* [jooq ignore stop] */
