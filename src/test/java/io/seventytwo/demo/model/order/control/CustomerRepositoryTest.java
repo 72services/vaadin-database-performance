@@ -3,14 +3,14 @@ package io.seventytwo.demo.model.order.control;
 import io.seventytwo.demo.model.order.entity.CustomerInfo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
+@SpringBootTest
 class CustomerRepositoryTest {
 
     @Autowired

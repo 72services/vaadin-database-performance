@@ -1,6 +1,6 @@
 # Vaadin Database Performance
 
-This is an example project for my talk **High-performance data access with Vaadin** at the [Vaadin Dev Day - Spring 2021](High-performance data access with Vaadin)
+This is an example project for my talk **High-performance data access with Vaadin**.
 
 The project is a standard Maven project, so you can import it to your IDE of choice. [Read more how to set up a development environment](https://vaadin.com/docs/v14/flow/installing/installing-overview.html) for Vaadin projects (Windows, Linux, macOS). 
 
@@ -8,13 +8,15 @@ The project is a standard Maven project, so you can import it to your IDE of cho
 
 ### Database
 
-The example application uses [PostgreSQL database](https://www.postgresql.org/). You need to install it locally or run it with [Docker](https://www.docker.com/get-started).
-
-Then create the database:
+The example application uses [PostgreSQL database](https://www.postgresql.org/). You need to install it locally and create the database:
 
     create database vaadin;
     create user vaadin with encrypted password 'vaadin';
     grant all privileges on database vaadin to vaadin;
+
+Or use Docker:
+
+    docker run --name postgres-vaadin -d -p5432:5432 -e POSTGRES_DB=vaadin -e POSTGRES_USER=vaadin -e POSTGRES_PASSWORD=vaadin -d postgres:12.7
 
 ### Java
 
