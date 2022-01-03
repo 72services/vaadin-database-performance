@@ -25,7 +25,7 @@ public class OrderControllerV3 {
     }
 
     @GetMapping(value = "/api/v3/orders", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public List<OrderDTO> getOrdersAsRecords(@RequestParam Integer customerId) {
+    public List<OrderDTO> getOrdersAsJson(@RequestParam Integer customerId) {
         return dslContext
                 .select(PURCHASE_ORDER.ID,
                         PURCHASE_ORDER.ORDER_DATE,
@@ -40,4 +40,5 @@ public class OrderControllerV3 {
                 .where(PURCHASE_ORDER.CUSTOMER_ID.eq(customerId))
                 .fetch(mapping(OrderDTO::new));
     }
+
 }

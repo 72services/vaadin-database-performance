@@ -1,7 +1,7 @@
 package io.seventytwo.demo.views.layout;
 
 import io.seventytwo.demo.views.employee.EmployeeTreeView;
-import io.seventytwo.demo.views.hello.HelloView;
+import io.seventytwo.demo.views.home.HomeView;
 import io.seventytwo.demo.views.order.CustomerRevenueV10JpaView;
 import io.seventytwo.demo.views.order.CustomerRevenueV11JpaPagingView;
 import io.seventytwo.demo.views.order.CustomerRevenueV12JpaCountView;
@@ -86,7 +86,7 @@ public class ApplicationLayout extends AppLayout {
 
     private Component[] createMenuItems() {
         return new Tab[]{
-                createTab("Hello", HelloView.class),
+                createTab("Hello", HomeView.class),
                 createTab("Customer Revenue List", CustomerRevenueV10JpaView.class),
                 createTab("Customer Revenue Paging", CustomerRevenueV11JpaPagingView.class),
                 createTab("Customer Revenue Count", CustomerRevenueV12JpaCountView.class),
