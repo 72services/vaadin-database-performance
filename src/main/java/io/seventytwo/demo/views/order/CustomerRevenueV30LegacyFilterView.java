@@ -48,7 +48,7 @@ public class CustomerRevenueV30LegacyFilterView extends VerticalLayout {
         grid.addColumn(CustomerInfo::lastname).setHeader("Last Name").setSortable(true).setSortProperty("lastname");
         grid.addColumn(CustomerInfo::revenue).setHeader("Revenue");
 
-        grid.setDataProvider(dataProvider);
+        grid.setItems(dataProvider);
 
         add(grid);
     }

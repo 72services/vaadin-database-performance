@@ -1,13 +1,10 @@
 package io.seventytwo.demo.api.order;
 
-import io.seventytwo.demo.model.order.entity.Order;
 import org.jooq.DSLContext;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class OrderControllerV2 {
@@ -39,7 +36,7 @@ public class OrderControllerV2 {
     public String getOrdersAsXml(@RequestParam Integer customerId) {
         return dslContext.fetchOne("""
                   select xmlelement(name "orders",
-                                  xmlagg(xmlelement(name "order", 
+                                  xmlagg(xmlelement(name "order",
                                                     xmlattributes(p.id, p.order_date),
                                                     xmlelement(name "items",
                                                                     (select xmlagg(xmlelement(name "item",

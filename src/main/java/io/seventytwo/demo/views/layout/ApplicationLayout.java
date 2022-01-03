@@ -86,7 +86,7 @@ public class ApplicationLayout extends AppLayout {
 
     private Component[] createMenuItems() {
         return new Tab[]{
-                createTab("Hello", HomeView.class),
+                createTab("Home", HomeView.class),
                 createTab("Customer Revenue List", CustomerRevenueV10JpaView.class),
                 createTab("Customer Revenue Paging", CustomerRevenueV11JpaPagingView.class),
                 createTab("Customer Revenue Count", CustomerRevenueV12JpaCountView.class),
