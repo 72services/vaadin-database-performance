@@ -38,18 +38,19 @@ public class OrderControllerV2 {
     @GetMapping(value = "/api/v2/orders", produces = MediaType.APPLICATION_XML_VALUE)
     public String getOrdersAsXml(@RequestParam Integer customerId) {
         return dslContext.fetchOne("""
-                select xmlelement(
-                    name "orders",
-                         xmlagg(xmlelement(name "order", 
-                                                xmlattributes(p.id, p.order_date),
-                                                xmlelement(name "items",
-                                               (select xmlagg(xmlelement(name "item",
-                                                              xmlattributes(i.id, i.quantity, pr.name)))
-                                                from order_item i
-                                                join product pr on i.product_id = pr.id
-                                                where i.order_id = p.id)))
-                                               )
-                )
+                  select xmlelement(name "orders",
+                                  xmlagg(xmlelement(name "order", 
+                                                    xmlattributes(p.id, p.order_date),
+                                                    xmlelement(name "items",
+                                                                    (select xmlagg(xmlelement(name "item",
+                                                                                              xmlattributes(i.id, i.quantity, pr.name)))
+                                                                     from order_item i
+                                                                     join product pr on i.product_id = pr.id
+                                                                     where i.order_id = p.id)
+                                                              )
+                                                    )
+                                        )
+                                 )
                 from purchase_order p
                 where p.customer_id = ?
                 """, customerId).into(String.class);
