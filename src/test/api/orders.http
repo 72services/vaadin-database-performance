@@ -1,0 +1,14 @@
+# GET oders for customer v1
+GET http://localhost:8080/api/v1/orders?customerId=1128
+
+###
+
+# GET oders for customer v2 as JSON
+GET http://localhost:8080/api/v2/orders?customerId=1128
+Accept: application/json
+
+###
+
+# GET oders for customer v2 as XML
+GET http://localhost:8080/api/v2/orders?customerId=1128
+Accept: application/xml
