@@ -28,6 +28,7 @@ public class Employee {
 
     @ManyToOne
     private Employee supervisor;
+
     @OneToMany(mappedBy = "supervisor")
     private List<Employee> directs;
 
