@@ -25,7 +25,7 @@ public class OrderControllerV3 {
     }
 
     @GetMapping(value = "/api/v3/orders", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<OrdersDTO.OrderDTO> getOrders(@RequestParam Integer customerId) {
+    public List<Orders.Order> getOrders(@RequestParam Integer customerId) {
         return dslContext
                 .select(PURCHASE_ORDER.ID,
                         PURCHASE_ORDER.ORDER_DATE,
@@ -34,16 +34,16 @@ public class OrderControllerV3 {
                                         .from(ORDER_ITEM)
                                         .join(PRODUCT).on(PRODUCT.ID.eq(ORDER_ITEM.PRODUCT_ID))
                                         .where(ORDER_ITEM.ORDER_ID.eq(PURCHASE_ORDER.ID))
-                        ).convertFrom(r -> r.into(OrdersDTO.OrderDTO.OrderItemDTO.class))
+                        ).convertFrom(r -> r.into(Orders.Order.Item.class))
                 )
                 .from(PURCHASE_ORDER)
                 .where(PURCHASE_ORDER.CUSTOMER_ID.eq(customerId))
-                .fetch(mapping(OrdersDTO.OrderDTO::new));
+                .fetch(mapping(Orders.Order::new));
     }
 
     @GetMapping(value = "/api/v3/orders", produces = MediaType.APPLICATION_XML_VALUE)
-    public OrdersDTO getOrdersAsXml(@RequestParam Integer customerId) {
-        return new OrdersDTO(getOrders(customerId));
+    public Orders getOrdersAsXml(@RequestParam Integer customerId) {
+        return new Orders(getOrders(customerId));
     }
 
 }
