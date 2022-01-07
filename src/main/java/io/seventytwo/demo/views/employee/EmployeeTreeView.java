@@ -6,8 +6,8 @@ import com.vaadin.flow.data.provider.hierarchy.AbstractBackEndHierarchicalDataPr
 import com.vaadin.flow.data.provider.hierarchy.HierarchicalQuery;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import io.seventytwo.demo.model.employee.control.EmployeeRepository;
-import io.seventytwo.demo.model.employee.entity.Employee;
+import io.seventytwo.demo.employee.control.EmployeeRepository;
+import io.seventytwo.demo.employee.entity.Employee;
 import io.seventytwo.demo.views.layout.ApplicationLayout;
 
 import java.util.stream.Stream;

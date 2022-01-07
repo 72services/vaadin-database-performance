@@ -1,4 +1,4 @@
-package io.seventytwo.demo.model.order.entity;
+package io.seventytwo.demo.order.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;

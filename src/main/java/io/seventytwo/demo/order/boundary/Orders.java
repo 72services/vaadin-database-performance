@@ -1,4 +1,4 @@
-package io.seventytwo.demo.api.order;
+package io.seventytwo.demo.order.boundary;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;

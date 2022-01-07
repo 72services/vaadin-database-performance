@@ -6,8 +6,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import io.seventytwo.demo.model.order.control.CustomerRepository;
-import io.seventytwo.demo.model.order.entity.CustomerInfo;
+import io.seventytwo.demo.order.control.CustomerRepository;
+import io.seventytwo.demo.order.entity.CustomerInfo;
 import io.seventytwo.demo.views.layout.ApplicationLayout;
 import org.springframework.data.domain.PageRequest;
 
