@@ -9,8 +9,7 @@ import java.util.List;
 @JacksonXmlRootElement(localName = "orders")
 public record Orders(@JacksonXmlElementWrapper(useWrapping = false) List<Order> order) {
 
-    public record Order(Integer id, LocalDate orderDate,
-                        @JacksonXmlElementWrapper(localName = "items") List<Item> item) {
+    public record Order(Integer id, LocalDate orderDate, @JacksonXmlElementWrapper(localName = "items") List<Item> item) {
 
         public record Item(Integer id, Integer quantity, String productName) {
         }
