@@ -1,6 +1,6 @@
-package io.seventytwo.demo.order.control;
+package io.seventytwo.demo.model.order.control;
 
-import io.seventytwo.demo.order.entity.Order;
+import io.seventytwo.demo.model.order.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

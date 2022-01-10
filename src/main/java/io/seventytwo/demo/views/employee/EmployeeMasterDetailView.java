@@ -24,8 +24,8 @@ import com.vaadin.flow.router.BeforeEnterObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.data.VaadinSpringDataHelpers;
-import io.seventytwo.demo.employee.control.EmployeeService;
-import io.seventytwo.demo.employee.entity.Employee;
+import io.seventytwo.demo.model.employee.control.EmployeeService;
+import io.seventytwo.demo.model.employee.entity.Employee;
 import io.seventytwo.demo.views.layout.ApplicationLayout;
 import org.springframework.data.domain.PageRequest;
 

@@ -1,4 +1,4 @@
-package io.seventytwo.demo.employee.entity;
+package io.seventytwo.demo.model.employee.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

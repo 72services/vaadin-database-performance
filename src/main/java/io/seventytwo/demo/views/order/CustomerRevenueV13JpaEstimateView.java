@@ -5,8 +5,8 @@ import com.vaadin.flow.component.grid.dataview.GridLazyDataView;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import io.seventytwo.demo.order.control.CustomerRepository;
-import io.seventytwo.demo.order.entity.Customer;
+import io.seventytwo.demo.model.order.control.CustomerRepository;
+import io.seventytwo.demo.model.order.entity.Customer;
 import io.seventytwo.demo.views.layout.ApplicationLayout;
 import org.springframework.data.domain.PageRequest;
 

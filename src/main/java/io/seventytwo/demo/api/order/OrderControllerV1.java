@@ -1,7 +1,7 @@
-package io.seventytwo.demo.order.boundary;
+package io.seventytwo.demo.api.order;
 
-import io.seventytwo.demo.order.control.OrderRepository;
-import io.seventytwo.demo.order.entity.Order;
+import io.seventytwo.demo.model.order.control.OrderRepository;
+import io.seventytwo.demo.model.order.entity.Order;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

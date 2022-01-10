@@ -1,7 +1,7 @@
-package io.seventytwo.demo.order.control;
+package io.seventytwo.demo.model.order.control;
 
-import io.seventytwo.demo.order.entity.Customer;
-import io.seventytwo.demo.order.entity.CustomerInfo;
+import io.seventytwo.demo.model.order.entity.Customer;
+import io.seventytwo.demo.model.order.entity.CustomerInfo;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

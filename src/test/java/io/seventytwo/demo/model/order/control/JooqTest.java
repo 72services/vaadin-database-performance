@@ -1,6 +1,6 @@
 package io.seventytwo.demo.model.order.control;
 
-import io.seventytwo.demo.order.entity.CustomerInfo;
+import io.seventytwo.demo.model.order.entity.CustomerInfo;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 import org.junit.jupiter.api.Test;

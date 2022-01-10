@@ -1,4 +1,4 @@
-package io.seventytwo.demo.order.boundary;
+package io.seventytwo.demo.api.order;
 
 import org.jooq.DSLContext;
 import org.springframework.http.MediaType;

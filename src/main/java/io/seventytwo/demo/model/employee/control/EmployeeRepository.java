@@ -1,6 +1,6 @@
-package io.seventytwo.demo.employee.control;
+package io.seventytwo.demo.model.employee.control;
 
-import io.seventytwo.demo.employee.entity.Employee;
+import io.seventytwo.demo.model.employee.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
