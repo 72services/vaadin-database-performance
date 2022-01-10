@@ -1,7 +1,6 @@
 package io.seventytwo.demo.views.order;
 
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridSortOrder;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -9,8 +8,6 @@ import io.seventytwo.demo.model.order.control.CustomerRepository;
 import io.seventytwo.demo.model.order.entity.Customer;
 import io.seventytwo.demo.views.layout.ApplicationLayout;
 import org.springframework.data.domain.Sort;
-
-import java.util.List;
 
 @Route(value = "customer-revenue-jpa-list", layout = ApplicationLayout.class)
 @PageTitle("Customer Revenue JPA List")
