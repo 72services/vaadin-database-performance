@@ -142,8 +142,7 @@ public class EmployeeMasterDetailView extends VerticalLayout implements BeforeEn
                 Notification.show(
                         String.format("The requested sampleEmployee was not found, ID = %d", sampleEmployeeId.get()), 3000,
                         Notification.Position.BOTTOM_START);
-                // when a row is selected but the data is no longer available,
-                // refresh grid
+                // when a row is selected but the data is no longer available, refresh grid
                 refreshGrid();
                 event.forwardTo(EmployeeMasterDetailView.class);
             }
