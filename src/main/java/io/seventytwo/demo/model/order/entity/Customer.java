@@ -1,15 +1,8 @@
 package io.seventytwo.demo.model.order.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
+
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 

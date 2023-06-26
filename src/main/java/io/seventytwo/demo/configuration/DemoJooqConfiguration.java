@@ -1,7 +1,7 @@
 package io.seventytwo.demo.configuration;
 
 import org.jooq.conf.RenderNameCase;
-import org.jooq.conf.Settings;
+import org.springframework.boot.autoconfigure.jooq.DefaultConfigurationCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class DemoJooqConfiguration {
 
     @Bean
-    Settings jooqSettings() {
-        return new Settings().withRenderNameCase(RenderNameCase.LOWER);
+    public DefaultConfigurationCustomizer configurationCustomizer() {
+        return context -> context.settings()
+                .withRenderNameCase(RenderNameCase.LOWER);
     }
 }
